@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} Edit Post {% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+	{% if user.id == post.author.id %} 
+
+	<h1> Update Post </h1>
+	<br>
+
+	<table>
+	<form method="POST">
+		{% csrf_token %}
+		{{ form.as_table }}
+	<table>
+		<button class="btn btn-success"> Update </button>
+
+	{% else %}
+
+		<div class="alert alert-danger" role="alert"> You are not allowed to update or edit this post! Only the Creator may edit or delete this Post! </div>
+
+	{% endif %}
+	
+{% else %}
+
+<div class="alert alert-danger" role="alert"> You are not allowed to update or edit this post! please login. </div>
+
+{% endif %}
+
+{% endblock %}
